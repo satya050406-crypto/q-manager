@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <h2>Uploaded Screenshots</h2>
+    <ul>
+        {% for ss in screenshots %}
+            <li>
+                {{ ss.title }} <br>
+                <img src="{{ ss.image.url }}" width="200">
+            </li>
+        {% empty %}
+            <li>No Screenshots uploaded yet.</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'upload_screenshot' %}">Upload New Screenshot</a>
+</div>
+{% endblock %}
+<ul>
+    {% for ss in screenshots %}
+        <li>
+            {{ ss.title }} <br>
+            <img src="{{ ss.image.url }}" width="200"> <br>
+            <a href="{% url 'delete_screenshot' ss.id %}">Delete</a>
+        </li>
+    {% empty %}
+        <li>No Screenshots uploaded yet.</li>
+    {% endfor %}
+</ul>

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <h2>Uploaded PDFs</h2>
+    <ul>
+        {% for pdf in pdfs %}
+            <li>
+                {{ pdf.title }} - 
+                <a href="{{ pdf.file.url }}" target="_blank">Open PDF</a>
+            </li>
+        {% empty %}
+            <li>No PDFs uploaded yet.</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'upload_pdf' %}">Upload New PDF</a>
+</div>
+{% endblock %}
+<ul>
+    {% for pdf in pdfs %}
+        <li>
+            {{ pdf.title }} -
+            <a href="{{ pdf.file.url }}" target="_blank">Open PDF</a> |
+            <a href="{% url 'delete_pdf' pdf.id %}">Delete</a>
+        </li>
+    {% empty %}
+        <li>No PDFs uploaded yet.</li>
+    {% endfor %}
+</ul>
+
+
