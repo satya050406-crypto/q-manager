@@ -166,3 +166,17 @@ def delete_screenshot(request, screenshot_id):
     screenshot.delete()
     messages.success(request, "Screenshot deleted successfully.")
     return redirect("list_screenshots")
+
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+
+@login_required
+def dashboard(request):
+    if request.user.is_superuser:
+        role = "Admin"
+    elif request.user.is_staff:
+        role = "Staff"
+    else:
+        role = "Normal User"
+    
+    return render(request, "dashboard.html", {"role": role})
